@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Mail, Github, Linkedin, ExternalLink, Calendar, MapPin, Code, Database, BarChart3, Brain, TrendingUp, Award } from 'lucide-react';
+import { Mail, Github, Linkedin, ExternalLink, Calendar, MapPin, Code, Database, BarChart3, Brain, TrendingUp, Award, Instagram, Twitter } from 'lucide-react';
 
 // Mock React Bits components since they're not available in this environment
 const SplitText = ({ children, className = "" }) => {
@@ -826,7 +826,7 @@ const Portfolio = () => {
               <div className="profile-image">PY</div>
               <h3>Bachelor of Science in Data Science</h3>
               <p>School of Data Science & Business Intelligence</p>
-              <p style={{ color: 'var(--accent-green)', fontWeight: 'bold' }}>CGPA: 9.8/10</p>
+              <p style={{ color: 'var(--accent-green)', fontWeight: 'bold' }}>CGPA: 9.2/10</p>
               
               <div className="social-links">
                 <a href="mailto:pavansy2006@gmail.com" className="social-link">
@@ -956,8 +956,8 @@ const Portfolio = () => {
             <a href="mailto:pavansy2006@gmail.com" className="social-link">
               <Mail size={18} />
             </a>
-            <a href="https://linkedin.com/in/pavansyadav" className="social-link" target="_blank" rel="noopener noreferrer">
-              <Linkedin size={18} />
+            <a href="https://www.instagram.com/pavansyadav_/" className="social-link" target="_blank" rel="noopener noreferrer">
+              <Instagram size={18} />
             </a>
             <a href="https://github.com/pavansy6" className="social-link" target="_blank" rel="noopener noreferrer">
               <Github size={18} />
