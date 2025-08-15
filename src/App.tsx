@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Mail, Github, Linkedin, ExternalLink, Calendar, MapPin, Code, Database, BarChart3, Brain, TrendingUp, Award, Instagram, Twitter } from 'lucide-react';
+import { Mail, Github, Linkedin, ExternalLink, Calendar, MapPin, Code, Database, BarChart3, Brain, TrendingUp, Award, Instagram, Twitter, Coins, Handshake } from 'lucide-react';
+import './App.css';
 
-// Mock React Bits components since they're not available in this environment
+// Mock React Bits components
 const SplitText = ({ children, className = "" }) => {
   const [isVisible, setIsVisible] = useState(false);
   
@@ -56,14 +57,6 @@ const TitledCard = ({ title, children, className = "" }) => {
   );
 };
 
-const PixelCard = ({ children, className = "" }) => {
-  return (
-    <div className={`pixel-card ${className}`}>
-      {children}
-    </div>
-  );
-};
-
 const CardSwap = ({ front, back, className = "" }) => {
   const [flipped, setFlipped] = useState(false);
   
@@ -96,7 +89,7 @@ const Portfolio = () => {
   const [activeSection, setActiveSection] = useState(0);
   const sectionRefs = useRef([]);
 
-  const sections = ['Home', 'Skills', 'Experience', 'Projects'];
+  const sections = ['Home', 'Skills', 'Experience', 'Projects', 'Interests'];
 
   const skills = [
     { category: 'Programming', items: ['Python', 'R', 'JavaScript', 'Java'], icon: Code },
@@ -810,8 +803,8 @@ const Portfolio = () => {
 
       {/* Hero Section */}
       <section 
-        ref={(el ) => { sectionRefs.current[0] = el; }} 
-        className="section"
+        ref={(el) => { sectionRefs.current[0] = el; }} 
+        className="section hero-section"
       >
         <div className="container">
           <div className="hero">
@@ -846,7 +839,7 @@ const Portfolio = () => {
 
       {/* Skills Section */}
       <section 
-        ref={(el ) => { sectionRefs.current[1] = el; }} 
+        ref={(el) => { sectionRefs.current[1] = el; }} 
         className="section"
       >
         <div className="container">
@@ -872,7 +865,7 @@ const Portfolio = () => {
 
       {/* Experience Section */}
       <section 
-        ref={(el ) => { sectionRefs.current[2] = el; }} 
+        ref={(el) => { sectionRefs.current[2] = el; }} 
         className="section"
       >
         <div className="container">
@@ -910,7 +903,7 @@ const Portfolio = () => {
 
       {/* Projects Section */}
       <section 
-        ref={(el ) => { sectionRefs.current[3] = el; }} 
+        ref={(el) => { sectionRefs.current[3] = el; }} 
         className="section"
       >
         <div className="container">
@@ -944,6 +937,28 @@ const Portfolio = () => {
                 }
               />
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Interests Section */}
+      <section 
+        ref={(el) => { sectionRefs.current[4] = el; }} 
+        className="section interests-section"
+      >
+        <div className="container">
+          <ShinyText className="section-title">Interests</ShinyText>
+          <div className="skills-grid">
+            <TitledCard title={<span><Coins size={24} /> Quantitative Finance</span>}>
+              <div className="card-content">
+                <p>Exploring mathematical and statistical models to analyze and predict financial market behavior, with a focus on risk management and derivatives pricing.</p>
+              </div>
+            </TitledCard>
+            <TitledCard title={<span><Handshake size={24} /> Algorithmic Trading</span>}>
+              <div className="card-content">
+                <p>Developing automated trading strategies using programming and data analysis to execute trades at high speeds, aiming for efficiency and profitability.</p>
+              </div>
+            </TitledCard>
           </div>
         </div>
       </section>
