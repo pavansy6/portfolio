@@ -1,61 +1,39 @@
 {
-  "name": "trading-portfolio",
-  "version": "0.1.0",
+  "name": "temp-app",
   "private": true,
-  "homepage": "https://pavansy6.github.io/portfolio",
-  "dependencies": {
-    "@react-three/drei": "^10.6.1",
-    "@react-three/fiber": "^9.3.0",
-    "@testing-library/dom": "^10.4.1",
-    "@testing-library/jest-dom": "^6.7.0",
-    "@testing-library/react": "^16.3.0",
-    "@testing-library/user-event": "^13.5.0",
-    "@types/jest": "^27.5.2",
-    "@types/node": "^16.18.126",
-    "@types/react": "^19.1.10",
-    "@types/react-dom": "^19.1.7",
-    "@types/three": "^0.179.0",
-    "lucide-react": "^0.539.0",
-    "ogl": "^1.0.11",
-    "ogm": "^0.0.4",
-    "react": "^19.1.1",
-    "react-bits": "^1.0.5",
-    "react-dom": "^19.1.1",
-    "react-scripts": "^5.0.1",
-    "react-tsparticles": "^2.12.2",
-    "three": "^0.179.1",
-    "tsparticles": "^3.9.1",
-    "tsparticles-slim": "^2.12.0",
-    "typescript": "^4.9.5",
-    "web-vitals": "^2.1.4"
-  },
+  "version": "0.0.0",
+  "type": "module",
   "scripts": {
-    "start": "NODE_OPTIONS=--openssl-legacy-provider react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "framer-motion": "^12.38.0",
+    "lucide-react": "^1.7.0",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "react-icons": "^5.6.0",
+    "tailwind-merge": "^3.5.0"
   },
   "devDependencies": {
-    "gh-pages": "^6.3.0"
+    "@eslint/js": "^9.39.4",
+    "@tailwindcss/vite": "^4.2.2",
+    "@types/node": "^24.12.0",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.1",
+    "autoprefixer": "^10.4.27",
+    "eslint": "^9.39.4",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-react-refresh": "^0.5.2",
+    "globals": "^17.4.0",
+    "postcss": "^8.5.8",
+    "tailwindcss": "^4.2.2",
+    "typescript": "~5.9.3",
+    "typescript-eslint": "^8.57.0",
+    "vite": "^8.0.1"
   }
 }
