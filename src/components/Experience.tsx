@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Calendar, MapPin, Briefcase } from 'lucide-react';
+import { Calendar, MapPin, FileArchive } from 'lucide-react';
 
 const ExperienceCard = () => {
   const experiences = [
@@ -8,6 +8,7 @@ const ExperienceCard = () => {
       company: "Marsh McLennan",
       location: "Mumbai, Maharashtra, India",
       date: "Feb 2025 - Present",
+      status: "ACTIVE_PROTOCOL",
       duties: [
         "Processed and analyzed data from 8 diverse sources, classifying cyber claims into a predefined taxonomy.",
         "Automated repetitive processes using Python and Pandas, reducing processing time and minimizing human errors.",
@@ -18,41 +19,50 @@ const ExperienceCard = () => {
   ];
 
   return (
-    <div className="relative border-l-2 border-purple-500/30 pl-8 ml-4">
-      {/* Timeline glowing dot */}
-      <div className="absolute -left-[9px] top-6 w-4 h-4 rounded-full bg-purple-500 shadow-[0_0_15px_rgba(139,92,246,0.8)]" />
-
+    <div className="relative border-l border-yellow-500/20 pl-6 ml-2 md:ml-4 w-full pt-4">
       {experiences.map((exp, index) => (
         <motion.div
           key={index}
-          initial={{ opacity: 0, x: 20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true, margin: "-100px" }}
-          className="mb-12 relative"
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="mb-12 relative group"
         >
-          <div className="glass-card neon-border rounded-xl p-8 hover:bg-black/80 transition-all duration-300">
-            <h3 className="text-2xl font-black font-heading text-slate-100 flex items-center gap-3">
-              <span className="text-glow">{exp.company}</span>
-            </h3>
+          {/* Tactical connection line */}
+          <div className="absolute -left-[25px] top-6 w-[24px] h-[1px] bg-yellow-500/50" />
+          {/* Timeline hollow node */}
+          <div className="absolute -left-[29px] top-[20px] w-2 h-2 border border-yellow-500 bg-black rotate-45 group-hover:bg-yellow-500 transition-colors" />
+
+          <div className="glass-card tactical-border rounded-sm p-6 bg-black/60 hover:border-yellow-500/50 transition-all duration-300">
+            <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 mb-4 border-b border-white/5 pb-4">
+              <div>
+                <h3 className="text-xl font-bold font-heading text-slate-200 uppercase tracking-widest flex items-center gap-3">
+                  {exp.company}
+                </h3>
+                <h4 className="text-yellow-500 mt-1 font-mono text-sm tracking-widest">{exp.title}</h4>
+              </div>
+              
+              <div className="flex items-center gap-2 border border-yellow-500/30 px-2 py-1 bg-yellow-500/5 shrink-0">
+                <span className="w-1.5 h-1.5 bg-yellow-500 animate-pulse" />
+                <span className="font-mono text-[10px] text-yellow-500 tracking-widest">{exp.status}</span>
+              </div>
+            </div>
             
-            <h4 className="text-xl text-purple-400 mt-2 font-body font-semibold">{exp.title}</h4>
-            
-            <div className="flex flex-wrap gap-4 mt-3 mb-6 text-xs font-mono text-slate-400">
-              <div className="flex items-center gap-1 bg-black/50 px-3 py-1 rounded-full border border-purple-900/30">
-                <Calendar size={14} className="text-pink-500" />
+            <div className="flex flex-wrap gap-4 mb-6 text-xs font-mono text-slate-400">
+              <div className="flex items-center gap-2">
+                <Calendar size={14} className="text-slate-500" />
                 <span>{exp.date}</span>
               </div>
-              <div className="flex items-center gap-1 bg-black/50 px-3 py-1 rounded-full border border-purple-900/30">
-                <MapPin size={14} className="text-pink-500" />
+              <div className="flex items-center gap-2">
+                <MapPin size={14} className="text-slate-500" />
                 <span>{exp.location}</span>
               </div>
             </div>
 
-            <ul className="space-y-3">
+            <ul className="space-y-3 font-mono text-sm">
               {exp.duties.map((duty, idx) => (
-                <li key={idx} className="flex gap-3 text-sm text-slate-300">
-                  <span className="text-pink-500 leading-tight">▶</span>
+                <li key={idx} className="flex gap-3 text-slate-300 items-start">
+                  <span className="text-yellow-500/70 mt-[2px]">&gt;</span>
                   <span className="leading-relaxed">{duty}</span>
                 </li>
               ))}
@@ -66,25 +76,17 @@ const ExperienceCard = () => {
 
 const Experience = () => {
   return (
-    <section id="experience" className="w-full min-h-screen py-24 px-6 relative z-10">
-      <div className="max-w-4xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, x: -50 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true, margin: "-100px" }}
-          className="mb-16 flex items-center gap-4"
-        >
-          <Briefcase className="text-pink-500" size={32} />
-          <h2 className="text-4xl md:text-5xl font-black font-heading text-slate-100 uppercase tracking-widest text-glow">
-            Service Record
-          </h2>
-          <div className="h-[1px] flex-grow bg-gradient-to-r from-purple-500/50 to-transparent ml-4" />
-        </motion.div>
-
-        <ExperienceCard />
+    <div className="w-full h-full flex flex-col relative z-10 max-w-4xl mx-auto">
+      <div className="mb-12 flex items-center gap-4">
+        <FileArchive className="text-yellow-500" size={24} />
+        <h2 className="text-2xl md:text-3xl font-black font-heading text-slate-200 uppercase tracking-widest">
+          MISSION_LOG
+        </h2>
+        <div className="h-[1px] flex-grow bg-gradient-to-r from-yellow-500/30 to-transparent ml-4" />
       </div>
-    </section>
+
+      <ExperienceCard />
+    </div>
   );
 };
 
