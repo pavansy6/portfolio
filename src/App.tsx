@@ -45,7 +45,7 @@ function App() {
   };
 
   return (
-    <div className="flex h-screen w-screen bg-black overflow-hidden font-body text-slate-200 selection:bg-yellow-500/30">
+    <div className="flex flex-col md:flex-row h-screen w-screen bg-black overflow-hidden font-body text-slate-200 selection:bg-yellow-500/30">
       <CustomCursor />
       
       {/* Background Film Grain */}
@@ -60,7 +60,7 @@ function App() {
       <Navigation activeView={activeView} setActiveView={setActiveView} />
 
       {/* Main Content Area */}
-      <main className="flex-1 relative z-10 h-full overflow-y-auto overflow-x-hidden flex flex-col items-center custom-scrollbar">
+      <main className="flex-1 relative z-10 h-full overflow-y-auto overflow-x-hidden flex flex-col items-center custom-scrollbar pb-20 md:pb-0">
         <AnimatePresence mode="wait">
           <motion.div
             key={activeView}

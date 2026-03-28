@@ -85,9 +85,9 @@ const Hero = ({ setActiveView }: HeroProps) => {
           SYSTEM.ONLINE // OPR_READY
         </motion.div>
 
-        <h1 className="text-6xl md:text-8xl lg:text-9xl font-black font-heading tracking-tighter text-slate-100 mb-6 uppercase">
-          <span className="block drop-shadow-lg">PAVAN</span>
-          <span className="block text-slate-400 mt-[-0.2em] drop-shadow-md">YADAV</span>
+        <h1 className="text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-black font-heading tracking-tighter text-slate-100 mb-6 uppercase">
+          <span className="block drop-shadow-lg leading-none">PAVAN</span>
+          <span className="block text-slate-400 md:mt-[-0.2em] drop-shadow-md leading-none">YADAV</span>
         </h1>
 
         <div className="text-xl md:text-2xl text-slate-400 mb-12 h-12 flex justify-center">

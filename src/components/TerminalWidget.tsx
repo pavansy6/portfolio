@@ -62,7 +62,8 @@ const TerminalWidget = () => {
 
   return (
     <>
-      <div className="fixed bottom-6 right-6 z-50 flex gap-4">
+      {/* Terminal Toggle Button */}
+      <div className="fixed bottom-[90px] md:bottom-6 right-4 md:right-6 z-50 flex gap-4">
         {!isOpen && (
           <motion.div
             initial={{ scale: 0 }}
@@ -80,6 +81,7 @@ const TerminalWidget = () => {
         )}
       </div>
 
+      {/* Terminal Window */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -91,7 +93,7 @@ const TerminalWidget = () => {
             }}
             exit={{ opacity: 0, y: 50, scale: 0.95 }}
             transition={{ type: "spring", stiffness: 300, damping: 25 }}
-            className={`fixed ${isMinimized ? 'bottom-0 right-6' : 'bottom-6 right-6'} w-[350px] md:w-[450px] z-50 bg-black tactical-border rounded-sm shadow-2xl overflow-hidden flex flex-col`}
+            className={`fixed ${isMinimized ? 'bottom-[70px] md:bottom-0 right-4 md:right-6' : 'bottom-[80px] md:bottom-6 right-4 left-4 md:left-auto md:right-6'} w-auto md:w-[450px] z-50 bg-black tactical-border rounded-sm shadow-2xl overflow-hidden flex flex-col`}
             style={{ height: isMinimized ? '40px' : '350px' }}
           >
             {/* Header */}
