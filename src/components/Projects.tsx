@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { projects } from "../data";
-import { SectionHeading } from "./Hero";
+import { SectionHeading } from "./SectionHeading";
 
 const bulletListVariants = {
   hidden: {},
@@ -38,14 +38,14 @@ const Projects = () => (
               <div className="flex-1">
                 <div className="flex items-center gap-3 mb-4">
                   <span className="font-mono text-[12px] text-stone-500">{p.index}</span>
-                  <span className="h-px w-8 bg-stone-900/15" />
+                  <span className="h-px w-8 bg-stone-900/15 dark:bg-stone-100/15" />
                   <span className="label text-stone-500">{p.date}</span>
                 </div>
-                <h3 className="font-display text-2xl md:text-[34px] leading-tight text-[#1c1917]">
+                <h3 className="font-display text-2xl md:text-[34px] leading-tight text-[#1c1917] dark:text-[#ede9e3]">
                   {p.title}
                 </h3>
-                <p className="mt-3 text-[15px] font-medium text-stone-700">{p.tagline}</p>
-                <p className="mt-3 text-[14px] text-stone-600 leading-relaxed">{p.description}</p>
+                <p className="mt-3 text-[15px] font-medium text-stone-700 dark:text-stone-300">{p.tagline}</p>
+                <p className="mt-3 text-[14px] text-stone-600 dark:text-stone-400 leading-relaxed">{p.description}</p>
 
                 <motion.ul
                   initial="hidden"
@@ -75,16 +75,16 @@ const Projects = () => (
               </div>
 
               <div className="mt-8 lg:mt-0 lg:w-[300px] shrink-0">
-                <div className="rounded-xl border border-stone-900/10 bg-[#f5f3ec] p-5">
+                <div className="rounded-xl border border-stone-900/10 dark:border-stone-100/10 bg-[#f5f3ec] dark:bg-stone-800/50 p-5">
                   <p className="label text-stone-500 mb-4">How it flows</p>
                   <ol className="space-y-0">
                     {p.architecture.map((step, si) => (
                       <li key={step} className="flex gap-3">
                         <div className="flex flex-col items-center">
-                          <span className="font-mono text-[10px] text-stone-500 border border-stone-900/15 rounded-full w-5 h-5 flex items-center justify-center">
+                          <span className="font-mono text-[10px] text-stone-500 border border-stone-900/15 dark:border-stone-100/15 rounded-full w-5 h-5 flex items-center justify-center">
                             {si + 1}
                           </span>
-                          {si < p.architecture.length - 1 && <span className="w-px flex-1 bg-stone-900/10 my-1" />}
+                          {si < p.architecture.length - 1 && <span className="w-px flex-1 bg-stone-900/10 dark:bg-stone-100/10 my-1" />}
                         </div>
                         <span className="text-[13px] text-stone-700 pb-4">{step}</span>
                       </li>
@@ -94,7 +94,7 @@ const Projects = () => (
                     href={p.github}
                     target="_blank"
                     rel="noreferrer"
-                    className="mt-2 flex items-center justify-between rounded-lg bg-white border border-stone-900/10 px-4 py-3 text-[13px] font-medium text-stone-700 hover:border-stone-900/25 transition-all"
+                    className="mt-2 flex items-center justify-between rounded-lg bg-white dark:bg-stone-900 border border-stone-900/10 dark:border-stone-100/10 px-4 py-3 text-[13px] font-medium text-stone-700 dark:text-stone-300 hover:border-stone-900/25 dark:hover:border-stone-100/25 transition-all"
                   >
                     View on GitHub
                     <ArrowUpRight size={15} className="text-stone-400" />

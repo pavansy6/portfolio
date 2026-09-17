@@ -10,7 +10,7 @@ import Contact from "./components/Contact";
 function App() {
   return (
     <MotionConfig reducedMotion="user">
-      <div className="min-h-screen w-full bg-[#f5f3ec] text-[#1c1917] font-sans selection:bg-[#c9a96a] selection:text-[#1c1917]">
+      <div className="min-h-screen w-full bg-[#f5f3ec] dark:bg-[#141210] text-[#1c1917] dark:text-[#ede9e3] font-sans selection:bg-[#c9a96a] selection:text-[#1c1917] dark:selection:bg-[#8a6d1f] dark:selection:text-[#f5f3ec]">
         <Navigation />
         <main>
           <Hero />

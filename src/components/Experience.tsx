@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { MapPin } from "lucide-react";
 import { experience } from "../data";
-import { SectionHeading } from "./Hero";
+import { SectionHeading } from "./SectionHeading";
 
 const listVariants = {
   hidden: {},
@@ -14,7 +14,7 @@ const itemVariants = {
 };
 
 const Experience = () => (
-  <section id="experience" className="scroll-mt-24 border-t border-stone-900/[0.08]">
+  <section id="experience" className="scroll-mt-24 border-t border-stone-900/[0.08] dark:border-stone-100/[0.08]">
     <div className="max-w-6xl mx-auto px-6 py-20 md:py-28">
       <SectionHeading
         index="02"
@@ -47,8 +47,8 @@ const Experience = () => (
                     {i === 0 ? "Current" : "Previous"}
                   </span>
                 </div>
-                <h3 className="font-display text-2xl md:text-3xl text-[#1c1917]">{e.company}</h3>
-                <p className="mt-1.5 text-[15px] font-medium text-stone-700">{e.role}</p>
+                <h3 className="font-display text-2xl md:text-3xl text-[#1c1917] dark:text-[#ede9e3]">{e.company}</h3>
+                <p className="mt-1.5 text-[15px] font-medium text-stone-700 dark:text-stone-300">{e.role}</p>
               </div>
               <div className="shrink-0 text-left md:text-right">
                 <p className="font-mono text-[12px] text-stone-700">{e.period}</p>
@@ -58,7 +58,7 @@ const Experience = () => (
               </div>
             </div>
 
-            <p className="mt-5 text-[14px] text-stone-600 leading-relaxed border-l-2 border-[#c9a96a]/60 pl-4">
+            <p className="mt-5 text-[14px] text-stone-600 dark:text-stone-400 leading-relaxed border-l-2 border-[#c9a96a]/60 pl-4">
               {e.summary}
             </p>
 
@@ -73,7 +73,7 @@ const Experience = () => (
                 <motion.li
                   key={pt}
                   variants={itemVariants}
-                  className="rounded-lg border border-stone-900/[0.08] bg-[#f5f3ec] p-4 text-[13.5px] text-stone-700 leading-relaxed"
+                  className="rounded-lg border border-stone-900/[0.08] dark:border-stone-100/[0.08] bg-[#f5f3ec] dark:bg-stone-800/50 p-4 text-[13.5px] text-stone-700 dark:text-stone-300 leading-relaxed"
                 >
                   {pt}
                 </motion.li>

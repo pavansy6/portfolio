@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:is(.dark *));
+
 @theme {
   --color-paper: #f5f3ec;
   --color-ink: #1c1917;
@@ -15,17 +17,24 @@
   :root {
     color-scheme: light;
   }
+  .dark {
+    color-scheme: dark;
+  }
   html {
     scroll-behavior: smooth;
   }
   body {
-    @apply bg-[#f5f3ec] text-[#1c1917] font-sans antialiased;
+    @apply bg-[#f5f3ec] dark:bg-[#141210] text-[#1c1917] dark:text-[#ede9e3] font-sans antialiased;
     overflow-x: hidden;
     text-rendering: optimizeLegibility;
   }
   ::selection {
     background: #c9a96a;
     color: #1c1917;
+  }
+  .dark ::selection {
+    background: #8a6d1f;
+    color: #f5f3ec;
   }
 }
 
@@ -49,6 +58,13 @@
       0 1px 2px rgba(28, 25, 23, 0.04),
       0 12px 32px -16px rgba(28, 25, 23, 0.15);
   }
+  .dark .card {
+    background: #1c1917;
+    border-color: rgba(237, 233, 227, 0.08);
+    box-shadow:
+      0 1px 2px rgba(0, 0, 0, 0.2),
+      0 12px 32px -16px rgba(0, 0, 0, 0.4);
+  }
   .card-hover {
     transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
   }
@@ -58,6 +74,12 @@
     box-shadow:
       0 1px 2px rgba(28, 25, 23, 0.05),
       0 20px 44px -16px rgba(28, 25, 23, 0.22);
+  }
+  .dark .card-hover:hover {
+    border-color: rgba(237, 233, 227, 0.15);
+    box-shadow:
+      0 1px 2px rgba(0, 0, 0, 0.3),
+      0 20px 44px -16px rgba(0, 0, 0, 0.5);
   }
   .hairline {
     height: 1px;
@@ -69,6 +91,11 @@
       linear-gradient(90deg, rgba(28, 25, 23, 0.05) 1px, transparent 1px);
     background-size: 56px 56px;
     mask-image: radial-gradient(ellipse 90% 70% at 50% 0%, black 30%, transparent 75%);
+  }
+  .dark .grid-bg {
+    background-image:
+      linear-gradient(rgba(237, 233, 227, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(237, 233, 227, 0.04) 1px, transparent 1px);
   }
   .custom-scrollbar::-webkit-scrollbar {
     width: 8px;

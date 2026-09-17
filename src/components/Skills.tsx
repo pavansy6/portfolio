@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { skillGroups } from "../data";
-import { SectionHeading } from "./Hero";
+import { SectionHeading } from "./SectionHeading";
 
 const pillListVariants = {
   hidden: {},
@@ -14,7 +14,7 @@ const pillVariants = {
 };
 
 const Skills = () => (
-  <section id="stack" className="scroll-mt-24 border-t border-stone-900/[0.08]">
+  <section id="stack" className="scroll-mt-24 border-t border-stone-900/[0.08] dark:border-stone-100/[0.08]">
     <div className="max-w-6xl mx-auto px-6 py-20 md:py-28">
       <SectionHeading
         index="03"
@@ -36,7 +36,7 @@ const Skills = () => (
             <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-stone-500">
               {String(i + 1).padStart(2, "0")}
             </p>
-            <h3 className="mt-2 font-display text-xl text-[#1c1917]">{g.title}</h3>
+            <h3 className="mt-2 font-display text-xl text-[#1c1917] dark:text-[#ede9e3]">{g.title}</h3>
             <motion.div
               initial="hidden"
               whileInView="show"
@@ -48,7 +48,7 @@ const Skills = () => (
                 <motion.span
                   key={s}
                   variants={pillVariants}
-                  className="text-[12.5px] text-stone-600 bg-stone-900/[0.03] border border-stone-900/10 rounded-md px-2.5 py-1 hover:border-stone-900/25 hover:text-stone-900 transition-colors"
+                  className="text-[12.5px] text-stone-600 dark:text-stone-400 bg-stone-900/[0.03] dark:bg-stone-100/[0.03] border border-stone-900/10 dark:border-stone-100/10 rounded-md px-2.5 py-1 hover:border-stone-900/25 dark:hover:border-stone-100/25 hover:text-stone-900 dark:hover:text-stone-100 transition-colors"
                 >
                   {s}
                 </motion.span>
@@ -68,7 +68,7 @@ const Skills = () => (
         >
           <div>
             <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-stone-500">Proof</p>
-            <h3 className="mt-2 font-display text-xl text-[#1c1917] leading-snug">
+            <h3 className="mt-2 font-display text-xl text-[#1c1917] dark:text-[#ede9e3] leading-snug">
               Stack is only half the story. Here&apos;s where it shipped.
             </h3>
           </div>
