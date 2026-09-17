@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { profile } from "../data";
 import ThemeToggle from "./ThemeToggle";
+import OrbitMark from "./OrbitMark";
 
 const links = [
   { id: "work", label: "Work" },
@@ -46,8 +47,9 @@ const Navigation = () => {
       }`}
     >
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-        <a href="#top" className="flex items-baseline gap-2 group">
-          <span className="font-display italic text-lg text-[#1c1917] dark:text-[#ede9e3]">Pavan Yadav</span>
+        <a href="#top" className="flex items-center gap-2.5 group text-[#1c1917] dark:text-[#ede9e3]">
+          <OrbitMark className="h-7 w-7" />
+          <span className="font-display italic text-lg">Pavan Yadav</span>
           <span className="label text-stone-500 hidden sm:inline">/ AI Engineer</span>
         </a>
 
