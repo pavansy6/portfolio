@@ -44,6 +44,8 @@ const Hero = () => {
         style={{ opacity: contentOpacity }}
         className="relative max-w-6xl mx-auto px-6 pt-32 md:pt-44 pb-14 md:pb-20"
       >
+        <div className="grid lg:grid-cols-[1.2fr_0.8fr] gap-12 lg:gap-8 items-start lg:items-center">
+          <div>
         <motion.div
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
@@ -67,7 +69,7 @@ const Hero = () => {
           initial={{ opacity: 0, y: 28 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.08 }}
-          className="font-display text-[42px] leading-[1.02] sm:text-6xl md:text-[84px] text-[#1c1917] dark:text-[#ede9e3] max-w-4xl"
+          className="font-display text-[42px] leading-[1.02] sm:text-6xl lg:text-[68px] text-[#1c1917] dark:text-[#ede9e3] max-w-4xl"
         >
           AI engineer building systems that survive <span className="italic text-[#8a6d1f]">production.</span>
         </motion.h1>
@@ -114,15 +116,16 @@ const Hero = () => {
             GitHub <ArrowUpRight size={15} />
           </a>
         </motion.div>
-
+          </div>
+          <div className="flex flex-col lg:items-end">
           <motion.dl
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.9, delay: 0.4 }}
-          className="mt-14 md:mt-20 grid grid-cols-2 md:grid-cols-4 border-t border-stone-900/10 dark:border-stone-100/10"
+          transition={{ duration: 0.9, delay: 0.5 }}
+          className="w-full lg:max-w-[300px] grid grid-cols-2 gap-x-6 gap-y-6 lg:flex lg:flex-col lg:gap-0"
         >
           {stats.map((s) => (
-            <div key={s.label} className="pt-6 pr-6 pb-2">
+            <div key={s.label} className="pt-4 pb-1 lg:py-5 border-t border-stone-900/10 dark:border-stone-100/10 lg:last:border-b">
               <dt className="font-display text-2xl md:text-[28px] text-[#1c1917] dark:text-[#ede9e3]">
                 <CountUp to={s.value} decimals={s.decimals} suffix={s.suffix} />
               </dt>
@@ -130,6 +133,8 @@ const Hero = () => {
             </div>
           ))}
         </motion.dl>
+          </div>
+        </div>
       </motion.div>
 
       {/* stack marquee */}
