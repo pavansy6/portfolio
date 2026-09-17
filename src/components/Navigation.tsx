@@ -39,14 +39,14 @@ const Navigation = () => {
     <header
       className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-[#0a0a0b]/85 backdrop-blur-xl border-b border-white/[0.07]"
+          ? "bg-[#f5f3ec]/85 backdrop-blur-xl border-b border-stone-900/[0.08]"
           : "bg-transparent border-b border-transparent"
       }`}
     >
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
         <a href="#top" className="flex items-baseline gap-2 group">
-          <span className="font-display italic text-lg text-[#ece9e2]">Pavan Yadav</span>
-          <span className="label text-zinc-500 hidden sm:inline">/ AI Engineer</span>
+          <span className="font-display italic text-lg text-[#1c1917]">Pavan Yadav</span>
+          <span className="label text-stone-500 hidden sm:inline">/ AI Engineer</span>
         </a>
 
         <nav className="hidden md:flex items-center gap-7">
@@ -55,7 +55,7 @@ const Navigation = () => {
               key={l.id}
               href={`#${l.id}`}
               className={`text-[13px] font-medium tracking-wide transition-colors ${
-                active === l.id ? "text-[#ece9e2]" : "text-zinc-500 hover:text-zinc-200"
+                active === l.id ? "text-[#1c1917]" : "text-stone-500 hover:text-stone-900"
               }`}
             >
               {l.label}
@@ -64,16 +64,16 @@ const Navigation = () => {
         </nav>
 
         <div className="flex items-center gap-3">
-          <span className="hidden sm:flex items-center gap-2 text-[12px] text-zinc-400 border border-white/10 rounded-full px-3 py-1.5">
+          <span className="hidden sm:flex items-center gap-2 text-[12px] text-stone-600 border border-stone-900/10 bg-white/70 rounded-full px-3 py-1.5">
             <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-60" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400" />
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#c9a96a] opacity-60" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-[#c9a96a]" />
             </span>
             Open to work
           </span>
           <a
             href={`mailto:${profile.email}`}
-            className="text-[13px] font-semibold bg-[#ece9e2] text-[#0a0a0b] rounded-full px-4 py-2 hover:bg-white transition-colors"
+            className="text-[13px] font-semibold bg-[#1c1917] text-[#f7f5f0] rounded-full px-4 py-2 hover:bg-stone-800 transition-colors"
           >
             Email me
           </a>
@@ -81,9 +81,9 @@ const Navigation = () => {
       </div>
 
       {/* mobile quick links */}
-      <nav className="md:hidden flex items-center gap-5 overflow-x-auto px-6 pb-3 text-[13px] text-zinc-400">
+      <nav className="md:hidden flex items-center gap-5 overflow-x-auto px-6 pb-3 text-[13px] text-stone-500">
         {links.map((l) => (
-          <a key={l.id} href={`#${l.id}`} className="shrink-0 hover:text-zinc-100">
+          <a key={l.id} href={`#${l.id}`} className="shrink-0 hover:text-stone-900">
             {l.label}
           </a>
         ))}

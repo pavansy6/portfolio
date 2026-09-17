@@ -1,3 +1,4 @@
+import { MotionConfig } from "framer-motion";
 import Navigation from "./components/Navigation";
 import Hero from "./components/Hero";
 import Projects from "./components/Projects";
@@ -8,17 +9,19 @@ import Contact from "./components/Contact";
 
 function App() {
   return (
-    <div className="min-h-screen w-full bg-[#0a0a0b] text-[#ece9e2] font-sans selection:bg-[#b8e62e] selection:text-black">
-      <Navigation />
-      <main>
-        <Hero />
-        <Projects />
-        <Experience />
-        <Skills />
-        <Education />
-        <Contact />
-      </main>
-    </div>
+    <MotionConfig reducedMotion="user">
+      <div className="min-h-screen w-full bg-[#f5f3ec] text-[#1c1917] font-sans selection:bg-[#c9a96a] selection:text-[#1c1917]">
+        <Navigation />
+        <main>
+          <Hero />
+          <Projects />
+          <Experience />
+          <Skills />
+          <Education />
+          <Contact />
+        </main>
+      </div>
+    </MotionConfig>
   );
 }
 
