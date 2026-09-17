@@ -17,7 +17,7 @@ const Skills = () => (
   <section id="stack" className="scroll-mt-24 border-t border-stone-900/[0.08] dark:border-stone-100/[0.08]">
     <div className="max-w-6xl mx-auto px-6 py-20 md:py-28">
       <SectionHeading
-        index="03"
+        index="04"
         label="Technical stack"
         title="Depth where it counts."
         body="Five layers I work across daily, from Python APIs to autonomous agents, retrieval infrastructure, and the MLOps that keeps it all running."

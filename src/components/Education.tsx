@@ -7,7 +7,7 @@ const Education = () => (
   <section id="education" className="scroll-mt-24 border-t border-stone-900/[0.08] dark:border-stone-100/[0.08]">
     <div className="max-w-6xl mx-auto px-6 py-20 md:py-28">
       <SectionHeading
-        index="04"
+        index="05"
         label="Education"
         title="Schooled in Mumbai, trained on data."
         body="From Andheri classrooms to a data-science degree, the foundation under the engineering."

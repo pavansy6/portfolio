@@ -28,7 +28,7 @@ const Contact = () => {
         >
           <div className="absolute -top-24 right-0 w-[380px] h-[240px] rounded-full bg-[#c9a96a]/[0.18] dark:bg-[#c9a96a]/[0.08] blur-[100px] pointer-events-none" />
           <div className="flex items-center gap-3 mb-6">
-            <span className="label text-stone-500">05</span>
+            <span className="label text-stone-500">06</span>
             <span className="h-px w-10 bg-stone-900/15" />
             <span className="label text-stone-500">Contact</span>
           </div>
