@@ -1,82 +1,94 @@
-import { motion } from 'framer-motion';
-import { Code2, Cpu, FileText, Mail, Home } from 'lucide-react';
-import batmanLogo from '../assets/batman-logo.png';
+import { useEffect, useState } from "react";
+import { profile } from "../data";
 
-export type ViewType = 'home' | 'projects' | 'skills' | 'experience' | 'contact';
+const links = [
+  { id: "work", label: "Work" },
+  { id: "experience", label: "Experience" },
+  { id: "stack", label: "Stack" },
+  { id: "education", label: "Education" },
+  { id: "contact", label: "Contact" },
+];
 
-interface NavigationProps {
-  activeView: ViewType;
-  setActiveView: (view: ViewType) => void;
-}
+const Navigation = () => {
+  const [scrolled, setScrolled] = useState(false);
+  const [active, setActive] = useState("");
 
-const Navigation = ({ activeView, setActiveView }: NavigationProps) => {
-  const navItems: { id: ViewType; label: string; icon: React.FC<any> }[] = [
-    { id: 'home', label: 'SYSTEM_HUB', icon: Home },
-    { id: 'projects', label: 'PROJECTS', icon: Code2 },
-    { id: 'skills', label: 'CAPABILITIES', icon: Cpu },
-    { id: 'experience', label: 'MISSION_LOG', icon: FileText },
-    { id: 'contact', label: 'UPLINK', icon: Mail },
-  ];
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) setActive(e.target.id);
+        });
+      },
+      { rootMargin: "-40% 0px -55% 0px" }
+    );
+    links.forEach((l) => {
+      const el = document.getElementById(l.id);
+      if (el) observer.observe(el);
+    });
+    return () => observer.disconnect();
+  }, []);
 
   return (
-    <nav className="fixed bottom-0 left-0 w-full h-[70px] md:relative md:h-full md:w-64 bg-black/95 backdrop-blur-md md:bg-black border-t md:border-t-0 md:border-r border-white/10 md:border-white/5 flex flex-row md:flex-col z-50 shrink-0">
-      
-      {/* Bat Logo Area - Desktop Only */}
-      <div className="hidden md:flex p-8 items-center justify-center border-b border-white/5 opacity-80">
-        <img src={batmanLogo} alt="Batman Logo" className="w-24 h-auto object-contain mix-blend-lighten grayscale opacity-70" />
-      </div>
+    <header
+      className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
+        scrolled
+          ? "bg-[#0a0a0b]/85 backdrop-blur-xl border-b border-white/[0.07]"
+          : "bg-transparent border-b border-transparent"
+      }`}
+    >
+      <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+        <a href="#top" className="flex items-baseline gap-2 group">
+          <span className="font-display italic text-lg text-[#ece9e2]">Pavan Yadav</span>
+          <span className="label text-zinc-500 hidden sm:inline">/ AI Engineer</span>
+        </a>
 
-      {/* Profile Info - Desktop Only */}
-      <div className="hidden md:block p-6 text-center border-b border-white/5">
-        <h2 className="text-xl font-heading font-bold text-slate-200 uppercase tracking-widest">Pavan Yadav</h2>
-        <p className="text-xs text-yellow-500 font-mono mt-2 tracking-wide">AI_ENGINEER // OPR</p>
-      </div>
-
-      {/* Nav Links - Horizontal on Mobile, Vertical on Desktop */}
-      <div className="flex-1 flex flex-row md:flex-col justify-around py-0 px-2 md:py-6 md:px-4 gap-1 md:gap-2">
-        {navItems.map((item) => {
-          const isActive = activeView === item.id;
-          const Icon = item.icon;
-
-          return (
-            <button
-              key={item.id}
-              onClick={() => setActiveView(item.id)}
-              className={`relative flex flex-col md:flex-row items-center justify-center md:justify-start gap-1 md:gap-4 px-2 py-2 md:px-4 md:py-3 rounded-md transition-all duration-300 group flex-1 md:flex-none
-                ${isActive ? 'md:bg-yellow-500/10 text-yellow-500' : 'text-slate-400 hover:text-slate-200 md:hover:bg-white/5'}
-              `}
+        <nav className="hidden md:flex items-center gap-7">
+          {links.map((l) => (
+            <a
+              key={l.id}
+              href={`#${l.id}`}
+              className={`text-[13px] font-medium tracking-wide transition-colors ${
+                active === l.id ? "text-[#ece9e2]" : "text-zinc-500 hover:text-zinc-200"
+              }`}
             >
-              <Icon size={20} className={`transition-colors md:w-[18px] md:h-[18px] ${isActive ? 'text-yellow-500' : 'text-slate-500 group-hover:text-slate-300'}`} />
-              <span className={`font-mono text-[9px] md:text-sm tracking-wider uppercase ${isActive ? 'text-yellow-500' : 'text-slate-500'}`}>{item.label}</span>
+              {l.label}
+            </a>
+          ))}
+        </nav>
 
-              {isActive && (
-                <>
-                  {/* Top indicator for mobile */}
-                  <motion.div
-                    layoutId="activeNavIndicatorMobile"
-                    className="absolute top-0 left-1/4 w-1/2 h-[2px] bg-yellow-500 rounded-b-md md:hidden"
-                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                  />
-                  {/* Side indicator for desktop */}
-                  <motion.div
-                    layoutId="activeNavIndicatorDesktop"
-                    className="hidden md:block absolute left-0 top-0 w-1 h-full bg-yellow-500 rounded-r-md"
-                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                  />
-                </>
-              )}
-            </button>
-          );
-        })}
+        <div className="flex items-center gap-3">
+          <span className="hidden sm:flex items-center gap-2 text-[12px] text-zinc-400 border border-white/10 rounded-full px-3 py-1.5">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-60" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400" />
+            </span>
+            Open to work
+          </span>
+          <a
+            href={`mailto:${profile.email}`}
+            className="text-[13px] font-semibold bg-[#ece9e2] text-[#0a0a0b] rounded-full px-4 py-2 hover:bg-white transition-colors"
+          >
+            Email me
+          </a>
+        </div>
       </div>
 
-      {/* Footer Info - Desktop Only */}
-      <div className="hidden md:block p-4 border-t border-white/5 text-center">
-        <p className="font-mono text-[10px] text-slate-600 uppercase tracking-widest">
-          SYS.VER_2.4.9 <br /> SECURE COMM LINK
-        </p>
-      </div>
-    </nav>
+      {/* mobile quick links */}
+      <nav className="md:hidden flex items-center gap-5 overflow-x-auto px-6 pb-3 text-[13px] text-zinc-400">
+        {links.map((l) => (
+          <a key={l.id} href={`#${l.id}`} className="shrink-0 hover:text-zinc-100">
+            {l.label}
+          </a>
+        ))}
+      </nav>
+    </header>
   );
 };
 

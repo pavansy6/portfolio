@@ -1,122 +1,163 @@
-import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { Terminal } from 'lucide-react';
-import type { ViewType } from './Navigation';
-import batmanLogo from '../assets/batman-logo.png';
+import { motion } from "framer-motion";
+import { ArrowDown, ArrowUpRight, Copy, Check, MapPin } from "lucide-react";
+import { useState } from "react";
+import { profile, marqueeItems } from "../data";
 
-const TypewriterText = ({ texts, delay = 2000 }: { texts: string[], delay?: number }) => {
-  const [currentTextIndex, setCurrentTextIndex] = useState(0);
-  const [currentText, setCurrentText] = useState('');
-  const [isDeleting, setIsDeleting] = useState(false);
-
-  useEffect(() => {
-    let timeout: ReturnType<typeof setTimeout>;
-
-    const tick = () => {
-      const fullText = texts[currentTextIndex];
-
-      if (isDeleting) {
-        setCurrentText(fullText.substring(0, currentText.length - 1));
-      } else {
-        setCurrentText(fullText.substring(0, currentText.length + 1));
-      }
-
-      let typeSpeed = isDeleting ? 30 : 80;
-
-      if (!isDeleting && currentText === fullText) {
-        typeSpeed = delay;
-        setIsDeleting(true);
-      } else if (isDeleting && currentText === '') {
-        setIsDeleting(false);
-        setCurrentTextIndex((prev) => (prev + 1) % texts.length);
-        typeSpeed = 500;
-      }
-
-      timeout = setTimeout(tick, typeSpeed);
-    };
-
-    timeout = setTimeout(tick, 100);
-
-    return () => clearTimeout(timeout);
-  }, [currentText, isDeleting, currentTextIndex, texts, delay]);
-
-  return (
-    <span className="text-yellow-500 flex items-center h-[2em] font-mono font-medium tracking-normal">
-      <span className="mr-2 text-slate-500">&gt;</span>
-      {currentText}
-      <span className="animate-pulse ml-1 text-yellow-500 border-r-2 border-yellow-500 w-1 inline-block h-[1.2em]" />
-    </span>
-  );
+const fadeUp = {
+  initial: { opacity: 0, y: 24 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, margin: "-80px" },
 };
 
-interface HeroProps {
-  setActiveView: (view: ViewType) => void;
-}
+export const SectionHeading = ({
+  index,
+  label,
+  title,
+  body,
+}: {
+  index: string;
+  label: string;
+  title: string;
+  body?: string;
+}) => (
+  <motion.div {...fadeUp} transition={{ duration: 0.6 }} className="mb-12 md:mb-16">
+    <div className="flex items-center gap-3 mb-5">
+      <span className="label text-zinc-500">{index}</span>
+      <span className="h-px w-10 bg-white/15" />
+      <span className="label text-zinc-400">{label}</span>
+    </div>
+    <h2 className="font-display text-4xl md:text-5xl text-[#ece9e2] leading-[1.05] max-w-2xl">
+      {title}
+    </h2>
+    {body && <p className="mt-5 text-zinc-400 text-[15px] md:text-base leading-relaxed max-w-2xl">{body}</p>}
+  </motion.div>
+);
 
-const Hero = ({ setActiveView }: HeroProps) => {
-  const roles = [
-    "AI Engineer",
-    "Data Scientist",
-    "Machine Learning Specialist",
-    "Builder of intelligent systems"
-  ];
+const Hero = () => {
+  const [copied, setCopied] = useState(false);
+  const copyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(profile.email);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1800);
+    } catch {
+      /* clipboard unavailable */
+    }
+  };
 
   return (
-    <section className="w-full flex-1 flex flex-col items-center justify-center relative px-6 z-10 min-h-[70vh]">
+    <section id="top" className="relative overflow-hidden">
+      <div className="absolute inset-0 grid-bg" />
+      <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[720px] h-[420px] rounded-full bg-white/[0.06] blur-[120px] pointer-events-none" />
+      <div className="absolute top-20 -right-32 w-[420px] h-[420px] rounded-full bg-[#b8e62e]/[0.05] blur-[120px] pointer-events-none" />
 
-      {/* Background Watermark */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-5">
-        <img src={batmanLogo} className="w-[120%] max-w-[800px] h-auto object-contain mix-blend-lighten grayscale" alt="Batman Watermark" />
-      </div>
-
-      <motion.div
-        initial={{ opacity: 0, scale: 0.95, y: 20 }}
-        animate={{ opacity: 1, scale: 1, y: 0 }}
-        transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-        className="flex flex-col items-center text-center max-w-4xl relative z-10"
-      >
+      <div className="relative max-w-6xl mx-auto px-6 pt-32 md:pt-44 pb-14 md:pb-20">
         <motion.div
-          className="mb-8 py-1 px-4 rounded-sm border border-yellow-500/20 bg-yellow-500/5 text-yellow-500/80 text-xs font-mono uppercase tracking-widest flex items-center gap-3 tactical-border"
-          initial={{ opacity: 0, y: -20 }}
+          initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4, duration: 0.8 }}
+          transition={{ duration: 0.7 }}
+          className="flex flex-wrap items-center gap-3 mb-8"
         >
-          <span className="w-1.5 h-1.5 rounded-full bg-yellow-500 animate-pulse" />
-          SYSTEM.ONLINE // OPR_READY
+          <span className="flex items-center gap-2 text-[12px] text-zinc-300 border border-white/10 bg-white/[0.03] rounded-full px-3.5 py-1.5">
+            <MapPin size={13} className="text-zinc-500" />
+            {profile.location}
+          </span>
+          <span className="flex items-center gap-2 text-[12px] text-zinc-300 border border-white/10 bg-white/[0.03] rounded-full px-3.5 py-1.5">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-60" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400" />
+            </span>
+            {profile.title}
+          </span>
         </motion.div>
 
-        <h1 className="text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-black font-heading tracking-tighter text-slate-100 mb-6 uppercase">
-          <span className="block drop-shadow-lg leading-none">PAVAN</span>
-          <span className="block text-slate-400 md:mt-[-0.2em] drop-shadow-md leading-none">YADAV</span>
-        </h1>
+        <motion.h1
+          initial={{ opacity: 0, y: 28 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.08 }}
+          className="font-display text-[42px] leading-[1.02] sm:text-6xl md:text-[84px] text-[#ece9e2] max-w-4xl"
+        >
+          AI engineer building systems that survive <span className="italic text-zinc-400">production.</span>
+        </motion.h1>
 
-        <div className="text-xl md:text-2xl text-slate-400 mb-12 h-12 flex justify-center">
-          <TypewriterText texts={roles} />
-        </div>
+        <motion.p
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.18 }}
+          className="mt-7 text-zinc-400 text-base md:text-lg leading-relaxed max-w-2xl"
+        >
+          I&apos;m Pavan Yadav. I design LLM assistants, hybrid retrieval, and agentic workflows
+          that run on real enterprise data — from on-prem multi-skill copilots at{" "}
+          <span className="text-zinc-200 font-medium">SighBear Technologies</span> to large-scale
+          risk pipelines at <span className="text-zinc-200 font-medium">Marsh McLennan</span>.
+          My work lives where research meets uptime: RAG, evaluation, APIs, and MLOps.
+        </motion.p>
 
         <motion.div
-          className="flex flex-col sm:flex-row gap-6 mt-8 w-full sm:w-auto"
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.28 }}
+          className="mt-9 flex flex-col sm:flex-row sm:items-center gap-3"
+        >
+          <a
+            href="#work"
+            className="inline-flex items-center justify-center gap-2 bg-[#ece9e2] text-[#0a0a0b] font-semibold text-sm rounded-full px-6 py-3.5 hover:bg-white transition-colors"
+          >
+            View selected work
+            <ArrowDown size={16} />
+          </a>
+          <button
+            onClick={copyEmail}
+            className="inline-flex items-center justify-center gap-2.5 border border-white/12 bg-white/[0.03] text-zinc-200 text-sm rounded-full px-6 py-3.5 hover:border-white/25 transition-colors font-mono"
+          >
+            {copied ? <Check size={15} className="text-emerald-400" /> : <Copy size={15} className="text-zinc-500" />}
+            {copied ? "Copied to clipboard" : profile.email}
+          </button>
+          <a
+            href={profile.github}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center justify-center gap-1.5 text-sm text-zinc-400 hover:text-zinc-100 transition-colors px-2 py-3"
+          >
+            GitHub <ArrowUpRight size={15} />
+          </a>
+        </motion.div>
+
+        <motion.dl
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.8, duration: 1 }}
+          transition={{ duration: 0.9, delay: 0.4 }}
+          className="mt-14 md:mt-20 grid grid-cols-2 md:grid-cols-4 border-t border-white/[0.08]"
         >
-          <button
-            onClick={() => setActiveView('projects')}
-            className="w-full sm:w-auto px-8 py-4 bg-black tactical-border font-mono tracking-widest flex items-center justify-center gap-3 group text-sm hover:text-yellow-500 transition-colors"
-          >
-            <Terminal size={16} className="text-slate-500 group-hover:text-yellow-500 transition-colors" />
-            <span>ACCESS_FILES</span>
-          </button>
+          {[
+            ["Enterprise AI", "LLM assistants in production"],
+            ["Hybrid retrieval", "FAISS + BM25 + RRF"],
+            ["98% faster", "SQL Server → Databricks migration"],
+            ["8.5 CGPA", "B.Sc. Data Science & Business Analytics"],
+          ].map(([k, v]) => (
+            <div key={k} className="pt-6 pr-6 pb-2">
+              <dt className="font-display text-2xl md:text-[28px] text-[#ece9e2]">{k}</dt>
+              <dd className="mt-1.5 text-[13px] text-zinc-500 leading-snug">{v}</dd>
+            </div>
+          ))}
+        </motion.dl>
+      </div>
 
-          <button
-            onClick={() => setActiveView('contact')}
-            className="w-full sm:w-auto px-8 py-4 bg-yellow-500 text-black font-mono tracking-widest font-bold text-sm hover:bg-yellow-400 border border-yellow-500 transition-colors"
-          >
-            ESTABLISH_LINK
-          </button>
-        </motion.div>
-      </motion.div>
-
+      {/* stack marquee */}
+      <div className="relative border-y border-white/[0.07] bg-white/[0.015]">
+        <div className="mask-fade-x overflow-hidden">
+          <div className="animate-marquee flex w-max items-center gap-3 py-4 px-4">
+            {[...marqueeItems, ...marqueeItems].map((item, i) => (
+              <span
+                key={i}
+                className="font-mono text-[12px] uppercase tracking-[0.14em] text-zinc-500 border border-white/[0.07] rounded-full px-4 py-1.5 whitespace-nowrap"
+              >
+                {item}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
     </section>
   );
 };

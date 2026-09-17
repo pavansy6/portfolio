@@ -1,97 +1,82 @@
-import { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Mail, Copy, Check, Terminal } from 'lucide-react';
-import { FaGithub, FaLinkedin, FaInstagram } from 'react-icons/fa';
+import { motion } from "framer-motion";
+import { ArrowUpRight, Copy, Check, Phone } from "lucide-react";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { useState } from "react";
+import { profile } from "../data";
 
 const Contact = () => {
   const [copied, setCopied] = useState(false);
-
-  const handleCopy = () => {
-    navigator.clipboard.writeText('pavansy2006@gmail.com');
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+  const copyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(profile.email);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1800);
+    } catch {
+      /* noop */
+    }
   };
 
   return (
-    <div className="w-full h-full flex flex-col relative z-10 max-w-4xl mx-auto flex-1 justify-center pb-20">
-      
-      <motion.div
-        initial={{ opacity: 0, scale: 0.98 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5 }}
-        className="glass-card tactical-border rounded-sm p-8 md:p-12 relative overflow-hidden bg-black/80"
-      >
-        {/* Decorative corner accents */}
-        <div className="absolute top-0 left-0 w-8 h-8 border-t border-l border-yellow-500/50 pointer-events-none" />
-        <div className="absolute bottom-0 right-0 w-8 h-8 border-b border-r border-yellow-500/50 pointer-events-none" />
-
-        <div className="flex flex-col md:flex-row gap-12">
-          
-          <div className="flex-1">
-            <h2 className="text-3xl font-black font-heading text-slate-200 uppercase tracking-widest mb-2 flex items-center gap-3">
-              <span className="w-2 h-2 bg-yellow-500 animate-pulse" />
-              SECURE_UPLINK
-            </h2>
-            <p className="text-slate-400 mb-8 font-mono text-sm leading-relaxed">
-              System is awaiting encrypted transmission. If you have a project, role, or mission requiring a skilled AI Engineer, establish an uplink below.
-            </p>
-
-            <div className="space-y-6">
-              <div className="flex items-center gap-4 bg-black p-4 rounded-sm border border-yellow-500/20 relative group hover:border-yellow-500/50 transition-colors">
-                <Mail className="text-yellow-500" size={20} />
-                <span className="font-mono text-sm text-slate-300">pavansy2006@gmail.com</span>
-                
-                <button 
-                  onClick={handleCopy}
-                  className="absolute right-4 p-2 bg-yellow-500/10 hover:bg-yellow-500/20 rounded-sm transition-colors interactive text-yellow-500"
-                >
-                  {copied ? <Check size={16} className="text-green-500" /> : <Copy size={16} />}
-                </button>
-              </div>
-
-              <div className="flex gap-4">
-                <a href="https://github.com/pavansy6" target="_blank" rel="noreferrer" className="p-4 bg-black border border-white/5 rounded-sm hover:border-yellow-500/50 hover:bg-yellow-500/5 transition-all text-slate-400 hover:text-yellow-500 interactive group">
-                  <FaGithub className="group-hover:scale-110 transition-transform" />
-                </a>
-                <a href="https://linkedin.com/in/pavansyadav" target="_blank" rel="noreferrer" className="p-4 bg-black border border-white/5 rounded-sm hover:border-yellow-500/50 hover:bg-yellow-500/5 transition-all text-slate-400 hover:text-yellow-500 interactive group">
-                  <FaLinkedin className="group-hover:scale-110 transition-transform" />
-                </a>
-                <a href="https://www.instagram.com/pavansyadav_/" target="_blank" rel="noreferrer" className="p-4 bg-black border border-white/5 rounded-sm hover:border-yellow-500/50 hover:bg-yellow-500/5 transition-all text-slate-400 hover:text-yellow-500 interactive group">
-                  <FaInstagram className="group-hover:scale-110 transition-transform" />
-                </a>
-              </div>
-            </div>
+    <section id="contact" className="scroll-mt-24 border-t border-white/[0.06]">
+      <div className="max-w-6xl mx-auto px-6 py-20 md:py-28">
+        <motion.div
+          initial={{ opacity: 0, y: 28 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.65 }}
+          className="card relative overflow-hidden p-8 md:p-14"
+        >
+          <div className="absolute -top-24 right-0 w-[380px] h-[240px] rounded-full bg-[#b8e62e]/[0.07] blur-[100px] pointer-events-none" />
+          <div className="flex items-center gap-3 mb-6">
+            <span className="label text-zinc-500">05</span>
+            <span className="h-px w-10 bg-white/15" />
+            <span className="label text-zinc-400">Contact</span>
           </div>
 
-          <div className="flex-1 flex flex-col justify-center">
-            <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
-              <div className="group relative">
-                <span className="absolute left-4 top-4 text-yellow-500/50 font-mono text-xs">&gt;</span>
-                <input 
-                  type="text" 
-                  placeholder="SUBJECT_IDENTIFIER" 
-                  className="w-full bg-black/60 border border-white/10 rounded-sm pl-8 pr-4 py-4 font-mono text-sm text-slate-200 focus:outline-none focus:border-yellow-500/80 transition-all placeholder:text-slate-600"
-                />
-              </div>
-              <div className="group relative">
-                <span className="absolute left-4 top-4 text-yellow-500/50 font-mono text-xs">&gt;</span>
-                <textarea 
-                  placeholder="ENCRYPTED_PAYLOAD..." 
-                  rows={4}
-                  className="w-full bg-black/60 border border-white/10 rounded-sm pl-8 pr-4 py-4 font-mono text-sm text-slate-200 focus:outline-none focus:border-yellow-500/80 transition-all resize-none placeholder:text-slate-600"
-                ></textarea>
-              </div>
-              
-              <button className="w-full py-4 bg-yellow-500 text-black font-mono tracking-widest font-bold text-sm uppercase hover:bg-yellow-400 border border-yellow-500 transition-colors flex items-center justify-center gap-3 group">
-                <Terminal size={16} />
-                TRANSMIT_DATA
-              </button>
-            </form>
+          <h2 className="font-display text-4xl md:text-6xl leading-[1.03] text-[#ece9e2] max-w-3xl">
+            Have a hard retrieval or agent problem? <span className="italic text-zinc-400">Let&apos;s talk.</span>
+          </h2>
+          <p className="mt-5 text-zinc-400 text-[15px] md:text-base leading-relaxed max-w-xl">
+            I&apos;m most useful where LLMs meet messy enterprise reality — private deployments,
+            hybrid search, evaluation, and services that stay up. Email is the fastest way to reach me.
+          </p>
+
+          <div className="mt-9 flex flex-col sm:flex-row gap-3">
+            <a
+              href={`mailto:${profile.email}`}
+              className="inline-flex items-center justify-center gap-2 bg-[#ece9e2] text-[#0a0a0b] font-semibold text-sm rounded-full px-7 py-4 hover:bg-white transition-colors"
+            >
+              {profile.email}
+              <ArrowUpRight size={16} />
+            </a>
+            <button
+              onClick={copyEmail}
+              className="inline-flex items-center justify-center gap-2 border border-white/12 text-sm text-zinc-200 rounded-full px-7 py-4 hover:border-white/25 transition-colors"
+            >
+              {copied ? <Check size={15} className="text-emerald-400" /> : <Copy size={15} className="text-zinc-500" />}
+              {copied ? "Copied" : "Copy email"}
+            </button>
           </div>
 
-        </div>
-      </motion.div>
-    </div>
+          <div className="mt-10 pt-8 border-t border-white/[0.08] flex flex-col md:flex-row md:items-center gap-5 md:gap-8">
+            <a href={profile.github} target="_blank" rel="noreferrer" className="flex items-center gap-2.5 text-[14px] text-zinc-400 hover:text-zinc-100 transition-colors">
+              <FaGithub size={16} /> github.com/pavansy6 <ArrowUpRight size={13} className="text-zinc-600" />
+            </a>
+            <a href={profile.linkedin} target="_blank" rel="noreferrer" className="flex items-center gap-2.5 text-[14px] text-zinc-400 hover:text-zinc-100 transition-colors">
+              <FaLinkedin size={16} /> linkedin.com/in/pavansyadav <ArrowUpRight size={13} className="text-zinc-600" />
+            </a>
+            <a href={`tel:${profile.phone.replace(/[^+\d]/g, "")}`} className="flex items-center gap-2.5 text-[14px] text-zinc-400 hover:text-zinc-100 transition-colors">
+              <Phone size={16} /> {profile.phone}
+            </a>
+          </div>
+        </motion.div>
+
+        <footer className="mt-10 flex flex-col sm:flex-row items-center justify-between gap-3 text-[12.5px] text-zinc-600">
+          <p className="font-mono">© 2026 Pavan Yadav — Mumbai, India</p>
+          <p className="font-mono">Designed & built with React, Tailwind, Framer Motion</p>
+        </footer>
+      </div>
+    </section>
   );
 };
 

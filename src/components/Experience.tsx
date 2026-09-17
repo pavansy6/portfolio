@@ -1,93 +1,83 @@
-import { motion } from 'framer-motion';
-import { Calendar, MapPin, FileArchive } from 'lucide-react';
+import { motion } from "framer-motion";
+import { MapPin } from "lucide-react";
+import { experience } from "../data";
+import { SectionHeading } from "./Hero";
 
-const ExperienceCard = () => {
-  const experiences = [
-    {
-      title: "Data Science Intern",
-      company: "Marsh McLennan",
-      location: "Mumbai, Maharashtra, India",
-      date: "Feb 2025 - Present",
-      status: "ACTIVE_PROTOCOL",
-      duties: [
-        "Processed and analyzed data from 8 diverse sources, classifying cyber claims into a predefined taxonomy.",
-        "Automated repetitive processes using Python and Pandas, reducing processing time and minimizing human errors.",
-        "Cleaned and standardized datasets of regulatory acts and ransomware gang names.",
-        "Developed a deduplication dictionary reducing redundant aliases and improving tagging precision."
-      ]
-    }
-  ];
+const Experience = () => (
+  <section id="experience" className="scroll-mt-24 border-t border-white/[0.06]">
+    <div className="max-w-6xl mx-auto px-6 py-20 md:py-28">
+      <SectionHeading
+        index="02"
+        label="Experience"
+        title="Where I've done the work."
+        body="A specialist shipping AI systems today, trained on messy enterprise data — insurance pipelines, NLP dedup, and large-scale migrations before that."
+      />
 
-  return (
-    <div className="relative border-l border-yellow-500/20 pl-6 ml-2 md:ml-4 w-full pt-4">
-      {experiences.map((exp, index) => (
-        <motion.div
-          key={index}
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="mb-12 relative group"
-        >
-          {/* Tactical connection line */}
-          <div className="absolute -left-[25px] top-6 w-[24px] h-[1px] bg-yellow-500/50" />
-          {/* Timeline hollow node */}
-          <div className="absolute -left-[29px] top-[20px] w-2 h-2 border border-yellow-500 bg-black rotate-45 group-hover:bg-yellow-500 transition-colors" />
-
-          <div className="glass-card tactical-border rounded-sm p-6 bg-black/60 hover:border-yellow-500/50 transition-all duration-300">
-            <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 mb-4 border-b border-white/5 pb-4">
+      <div className="space-y-5">
+        {experience.map((e, i) => (
+          <motion.article
+            key={e.company}
+            initial={{ opacity: 0, y: 28 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.6, delay: i * 0.06 }}
+            className="card card-hover p-7 md:p-10"
+          >
+            <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
               <div>
-                <h3 className="text-xl font-bold font-heading text-slate-200 uppercase tracking-widest flex items-center gap-3">
-                  {exp.company}
-                </h3>
-                <h4 className="text-yellow-500 mt-1 font-mono text-sm tracking-widest">{exp.title}</h4>
+                <div className="flex items-center gap-3 mb-3">
+                  <span className="font-mono text-[12px] text-zinc-500">{e.index}</span>
+                  <span
+                    className={`text-[11px] font-mono uppercase tracking-[0.14em] rounded-full px-3 py-1 border ${
+                      i === 0
+                        ? "text-emerald-300 border-emerald-400/25 bg-emerald-400/[0.07]"
+                        : "text-zinc-400 border-white/10 bg-white/[0.03]"
+                    }`}
+                  >
+                    {i === 0 ? "Current" : "Previous"}
+                  </span>
+                </div>
+                <h3 className="font-display text-2xl md:text-3xl text-[#ece9e2]">{e.company}</h3>
+                <p className="mt-1.5 text-[15px] font-medium text-zinc-300">{e.role}</p>
               </div>
-              
-              <div className="flex items-center gap-2 border border-yellow-500/30 px-2 py-1 bg-yellow-500/5 shrink-0">
-                <span className="w-1.5 h-1.5 bg-yellow-500 animate-pulse" />
-                <span className="font-mono text-[10px] text-yellow-500 tracking-widest">{exp.status}</span>
-              </div>
-            </div>
-            
-            <div className="flex flex-wrap gap-4 mb-6 text-xs font-mono text-slate-400">
-              <div className="flex items-center gap-2">
-                <Calendar size={14} className="text-slate-500" />
-                <span>{exp.date}</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <MapPin size={14} className="text-slate-500" />
-                <span>{exp.location}</span>
+              <div className="shrink-0 text-left md:text-right">
+                <p className="font-mono text-[12px] text-zinc-300">{e.period}</p>
+                <p className="mt-1.5 flex md:justify-end items-center gap-1.5 text-[13px] text-zinc-500">
+                  <MapPin size={13} /> {e.location}
+                </p>
               </div>
             </div>
 
-            <ul className="space-y-3 font-mono text-sm">
-              {exp.duties.map((duty, idx) => (
-                <li key={idx} className="flex gap-3 text-slate-300 items-start">
-                  <span className="text-yellow-500/70 mt-[2px]">&gt;</span>
-                  <span className="leading-relaxed">{duty}</span>
+            <p className="mt-5 text-[14px] text-zinc-400 leading-relaxed border-l-2 border-[#b8e62e]/40 pl-4">
+              {e.summary}
+            </p>
+
+            <ul className="mt-6 grid gap-3 md:grid-cols-2">
+              {e.points.map((pt) => (
+                <li
+                  key={pt}
+                  className="rounded-lg border border-white/[0.06] bg-white/[0.015] p-4 text-[13.5px] text-zinc-300 leading-relaxed"
+                >
+                  {pt}
                 </li>
               ))}
             </ul>
-          </div>
-        </motion.div>
-      ))}
-    </div>
-  );
-};
 
-const Experience = () => {
-  return (
-    <div className="w-full h-full flex flex-col relative z-10 max-w-4xl mx-auto">
-      <div className="mb-12 flex items-center gap-4">
-        <FileArchive className="text-yellow-500" size={24} />
-        <h2 className="text-2xl md:text-3xl font-black font-heading text-slate-200 uppercase tracking-widest">
-          MISSION_LOG
-        </h2>
-        <div className="h-[1px] flex-grow bg-gradient-to-r from-yellow-500/30 to-transparent ml-4" />
+            <div className="mt-5 flex flex-wrap gap-2">
+              {e.stack.map((t) => (
+                <span
+                  key={t}
+                  className="font-mono text-[11px] text-zinc-500 border border-white/[0.07] rounded-md px-2.5 py-1"
+                >
+                  {t}
+                </span>
+              ))}
+            </div>
+          </motion.article>
+        ))}
       </div>
-
-      <ExperienceCard />
     </div>
-  );
-};
+  </section>
+);
 
 export default Experience;
