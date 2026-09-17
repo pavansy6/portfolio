@@ -17,7 +17,7 @@ const Experience = () => (
   <section id="experience" className="scroll-mt-24 border-t border-stone-900/[0.08] dark:border-stone-100/[0.08]">
     <div className="max-w-6xl mx-auto px-6 py-20 md:py-28">
       <SectionHeading
-        index="02"
+        index="03"
         label="Experience"
         title="Where I've done the work."
         body="A specialist shipping AI systems today, trained on messy enterprise data: insurance pipelines, NLP dedup, and large-scale migrations before that."

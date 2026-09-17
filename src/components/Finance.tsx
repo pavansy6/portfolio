@@ -98,7 +98,7 @@ const Finance = () => (
   <section id="finance" className="scroll-mt-24 border-t border-stone-900/[0.08] dark:border-stone-100/[0.08]">
     <div className="max-w-6xl mx-auto px-6 py-20 md:py-28">
       <SectionHeading
-        index="03"
+        index="02"
         label="Interests"
         title="What I explore on my own time."
         body="Finance and markets are where I spend my personal hours. Not client work, just curiosity."
