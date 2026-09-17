@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://pavansy6.github.io/portfolio/sitemap.xml
